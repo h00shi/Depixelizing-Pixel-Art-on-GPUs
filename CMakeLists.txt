@@ -35,6 +35,7 @@ endif()
 
 #set source files
 set(DEPIXELIZE_SOURCES
+src/getpot_libmesh.h
 src/main.cpp
 src/CellGraphBuilder.h 	
 src/CellGraphBuilder.cpp
@@ -56,15 +57,15 @@ src/VoronoiCellGraph3x3.cpp
 )
 
 #add boost::program_options
-set(Boost_USE_STATIC_LIBS        ON)
-set(Boost_USE_MULTITHREADED      ON)
-set(Boost_USE_STATIC_RUNTIME    OFF)
-find_package( Boost 1.36.0 COMPONENTS program_options REQUIRED )
-if(Boost_FOUND)
-    include_directories(${Boost_INCLUDE_DIRS})
+# set(Boost_USE_STATIC_LIBS        ON)
+# set(Boost_USE_MULTITHREADED      ON)
+# set(Boost_USE_STATIC_RUNTIME    OFF)
+# find_package( Boost 1.36.0 COMPONENTS program_options REQUIRED )
+# if(Boost_FOUND)
+#     include_directories(${Boost_INCLUDE_DIRS})
 	# add the executable
 	add_executable(DepixelizeOnGPU ${DEPIXELIZE_SOURCES})
-	target_link_libraries (DepixelizeOnGPU ${LIBS} ${Boost_LIBRARIES})
+	target_link_libraries (DepixelizeOnGPU ${LIBS})
 	#copy shader folder after successful build
 	add_custom_command(TARGET DepixelizeOnGPU POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/shaders $<TARGET_FILE_DIR:DepixelizeOnGPU>/../shaders)
-endif()
+# endif()

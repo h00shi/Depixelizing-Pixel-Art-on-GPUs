@@ -205,8 +205,11 @@ GLuint LoadCellGraphShader(const char * vertex_file_path,const char * geometry_f
 	glGetShaderiv(VertexShaderID, GL_COMPILE_STATUS, &Result);
 	glGetShaderiv(VertexShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
 	std::vector<char> VertexShaderErrorMessage(InfoLogLength);
-	glGetShaderInfoLog(VertexShaderID, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
-	fprintf(stdout, "%s\n", &VertexShaderErrorMessage[0]);
+	if (InfoLogLength > 0) 
+	{
+		glGetShaderInfoLog(VertexShaderID, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
+		fprintf(stdout, "%s\n", &VertexShaderErrorMessage[0]);
+	}
 
 	// Link the program
 	fprintf(stdout, "Linking program\n");
@@ -233,8 +236,11 @@ GLuint LoadCellGraphShader(const char * vertex_file_path,const char * geometry_f
 	glGetShaderiv(GeometryShaderID, GL_COMPILE_STATUS, &Result);
 	glGetShaderiv(GeometryShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
 	std::vector<char> GeometryShaderErrorMessage(InfoLogLength);
-	glGetShaderInfoLog(GeometryShaderID, InfoLogLength, NULL, &GeometryShaderErrorMessage[0]);
-	fprintf(stdout, "%s\n", &GeometryShaderErrorMessage[0]);
+	if (InfoLogLength > 0)
+	{
+		glGetShaderInfoLog(GeometryShaderID, InfoLogLength, NULL, &GeometryShaderErrorMessage[0]);
+		fprintf(stdout, "%s\n", &GeometryShaderErrorMessage[0]);
+	}
 
 	//Attach Geometry Shader
 	glAttachShader(ProgramID, GeometryShaderID);
@@ -364,8 +370,11 @@ GLuint LoadOptimizationShader(const char * vertex_file_path){
 	glGetShaderiv(VertexShaderID, GL_COMPILE_STATUS, &Result);
 	glGetShaderiv(VertexShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
 	std::vector<char> VertexShaderErrorMessage(InfoLogLength);
-	glGetShaderInfoLog(VertexShaderID, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
-	fprintf(stdout, "%s\n", &VertexShaderErrorMessage[0]);
+	if (InfoLogLength > 0)
+	{
+		glGetShaderInfoLog(VertexShaderID, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
+		fprintf(stdout, "%s\n", &VertexShaderErrorMessage[0]);
+	}
 
 	// Link the program
 	fprintf(stdout, "Linking program\n");
