@@ -35,7 +35,6 @@ endif()
 
 #set source files
 set(DEPIXELIZE_SOURCES
-src/getpot_libmesh.h
 src/main.cpp
 src/CellGraphBuilder.h 	
 src/CellGraphBuilder.cpp
