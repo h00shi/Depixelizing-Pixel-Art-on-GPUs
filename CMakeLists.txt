@@ -10,6 +10,7 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW test programs" FORCE)
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation" FORCE)
 set(GLFW_INSTALL OFF CACHE BOOL "Generate installation target" FORCE)
 set(BUILD_UTILS OFF CACHE BOOL "utilities" FORCE)
+set (CMAKE_CXX_STANDARD 11)
 
 # TODO: Windows vs Unix
 if(WIN32)
@@ -27,10 +28,18 @@ if(WIN32)
   set (LIBS ${LIBS} freeImageLib)
 else()
   # Unix
-  set (LIBS ${LIBS} glfw)
-  set (LIBS ${LIBS} GLEW)
-  set (LIBS ${LIBS} GL)
-  set (LIBS ${LIBS} freeimage)
+  find_package(PkgConfig REQUIRED)
+  pkg_check_modules(GLFW REQUIRED glfw3 )
+  pkg_check_modules(GLEW REQUIRED glew )
+  pkg_check_modules(GL REQUIRED gl)
+  
+  set (LIBS ${LIBS}
+    freeimage
+    ${GL_STATIC_LIBRARIES}
+    ${GLFW_STATIC_LIBRARIES}
+    ${GLEW_STATIC_LIBRARIES})
+
+  message(${LIBS})
 endif()
 
 #set source files

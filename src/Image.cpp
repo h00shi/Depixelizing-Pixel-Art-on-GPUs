@@ -13,6 +13,7 @@
 #define  FREEIMAGE_LIB
 #include "FreeImage.h"
 #include <iostream>
+#include <cstdio>
 
 Image::Image(const char *image_path, GLuint textureUnit, bool& success) {
 	success = true;
